@@ -1,0 +1,25 @@
+pyproject.toml without uv: Poetry table form and PEP 621 array form.
+-- changes --
+[
+ {"name":"flask","ecosystem":"pypi","to":"2.0.1","method":"direct","file":"poetry/pyproject.toml"},
+ {"name":"flask","ecosystem":"pypi","to":"2.0.1","method":"direct","file":"pep621/pyproject.toml"},
+ {"name":"requests","ecosystem":"pypi","to":"2.31.0","method":"override","file":"pep621/pyproject.toml"}
+]
+-- in:poetry/pyproject.toml --
+[tool.poetry.dependencies]
+flask = "^1.0"
+-- in:pep621/pyproject.toml --
+[project]
+dependencies = [
+  "flask>=1.0",
+  "requests",
+]
+-- out:pep621/pyproject.toml --
+[project]
+dependencies = [
+  "flask==2.0.1",
+  "requests==2.31.0",
+]
+-- out:poetry/pyproject.toml --
+[tool.poetry.dependencies]
+flask = "^2.0.1"

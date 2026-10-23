@@ -1,0 +1,20 @@
+uv: a multi line array without a trailing comma gets one added to the old last item.
+-- changes --
+[{"name":"urllib3","ecosystem":"pypi","to":"2.2.2","method":"override","file":"pyproject.toml"}]
+-- in:pyproject.toml --
+[project]
+name = "app"
+
+[tool.uv]
+override-dependencies = [
+  "idna==3.7"
+]
+-- out:pyproject.toml --
+[project]
+name = "app"
+
+[tool.uv]
+override-dependencies = [
+  "idna==3.7",
+  "urllib3==2.2.2"
+]

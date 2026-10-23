@@ -1,0 +1,31 @@
+Cargo.toml: a transitive pin is lock only, so the manifest is untouched and the lock command is returned.
+-- changes --
+[{"name":"time","ecosystem":"cargo","to":"0.3.36","method":"override","file":"Cargo.toml"}]
+-- in:Cargo.toml --
+[package]
+name = "app"
+version = "0.1.0"
+
+[dependencies]
+serde = "1.0"
+-- skipped --
+[
+  {
+    "change": {
+      "name": "time",
+      "ecosystem": "cargo",
+      "to": "0.3.36",
+      "method": "override",
+      "file": "Cargo.toml"
+    },
+    "reason": "lock only",
+    "lock": [
+      "cargo",
+      "update",
+      "-p",
+      "time",
+      "--precise",
+      "0.3.36"
+    ]
+  }
+]

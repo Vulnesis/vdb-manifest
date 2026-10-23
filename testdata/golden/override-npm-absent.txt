@@ -1,0 +1,32 @@
+npm with a lockfile: the overrides section is inserted after the last top-level key.
+-- changes --
+[
+ {"name":"semver","ecosystem":"npm","to":"7.7.2","method":"override","file":"package.json"},
+ {"name":"@scope/pkg","ecosystem":"npm","to":"1.2.3","method":"override","file":"package.json"}
+]
+-- in:package.json --
+{
+  "name": "app",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  }
+}
+-- in:package-lock.json --
+{}
+-- out:package.json --
+{
+  "name": "app",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "overrides": {
+    "semver": "7.7.2",
+    "@scope/pkg": "1.2.3"
+  }
+}

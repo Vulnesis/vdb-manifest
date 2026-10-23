@@ -1,0 +1,24 @@
+pnpm: neither pnpm nor pnpm.overrides exist, both are created after the last key.
+-- changes --
+[{"name":"semver","ecosystem":"npm","to":"7.7.2","method":"override","file":"package.json"}]
+-- in:package.json --
+{
+  "name": "app",
+  "dependencies": {
+    "vue": "^3.5.0"
+  }
+}
+-- in:pnpm-workspace.yaml --
+packages: []
+-- out:package.json --
+{
+  "name": "app",
+  "dependencies": {
+    "vue": "^3.5.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "semver": "7.7.2"
+    }
+  }
+}

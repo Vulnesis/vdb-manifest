@@ -1,0 +1,20 @@
+pyproject without uv: a package that is not declared cannot be pinned, and is reported.
+-- changes --
+[{"name":"urllib3","ecosystem":"pypi","to":"2.2.2","method":"override","file":"pyproject.toml"}]
+-- in:pyproject.toml --
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^2.0"
+-- skipped --
+[
+  {
+    "change": {
+      "name": "urllib3",
+      "ecosystem": "pypi",
+      "to": "2.2.2",
+      "method": "override",
+      "file": "pyproject.toml"
+    },
+    "reason": "no override section for this project"
+  }
+]

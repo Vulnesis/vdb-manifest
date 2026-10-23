@@ -1,0 +1,42 @@
+package.json direct and parent bumps keep the range operator and touch only dependency blocks.
+-- changes --
+[
+ {"name":"left-pad","ecosystem":"npm","from":"1.1.0","to":"1.3.0","method":"direct","file":"package.json"},
+ {"name":"parent","ecosystem":"npm","to":"2.0.0","method":"parent","file":"package.json"},
+ {"name":"absent","ecosystem":"npm","to":"2.0.0","method":"direct","file":"package.json"}
+]
+-- in:package.json --
+{
+  "name": "left-pad",
+  "dependencies": {
+    "left-pad": "^1.1.0",
+    "parent": "~1.0.0"
+  },
+  "overrides": {
+    "left-pad": "1.0.0"
+  }
+}
+-- out:package.json --
+{
+  "name": "left-pad",
+  "dependencies": {
+    "left-pad": "^1.3.0",
+    "parent": "~2.0.0"
+  },
+  "overrides": {
+    "left-pad": "1.0.0"
+  }
+}
+-- skipped --
+[
+  {
+    "change": {
+      "name": "absent",
+      "ecosystem": "npm",
+      "to": "2.0.0",
+      "method": "direct",
+      "file": "package.json"
+    },
+    "reason": "not declared in the manifest"
+  }
+]

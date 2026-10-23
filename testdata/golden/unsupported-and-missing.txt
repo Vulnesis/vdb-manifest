@@ -1,0 +1,56 @@
+A file with no writer, a missing file and a package that is not declared are all reported as skipped.
+-- changes --
+[
+ {"name":"x","ecosystem":"pypi","to":"1.0.0","method":"direct","file":"Pipfile"},
+ {"name":"x","ecosystem":"npm","to":"1.0.0","method":"direct","file":"nope/package.json"},
+ {"name":"x","ecosystem":"npm","to":"1.0.0","method":"direct","file":"package.json"},
+ {"name":"x","ecosystem":"pypi","to":"1.0.0","method":"override","file":"Pipfile"}
+]
+-- in:Pipfile --
+[packages]
+x = "*"
+-- in:package.json --
+{"dependencies": {}}
+-- skipped --
+[
+  {
+    "change": {
+      "name": "x",
+      "ecosystem": "pypi",
+      "to": "1.0.0",
+      "method": "direct",
+      "file": "Pipfile"
+    },
+    "reason": "no writer for this file"
+  },
+  {
+    "change": {
+      "name": "x",
+      "ecosystem": "npm",
+      "to": "1.0.0",
+      "method": "direct",
+      "file": "nope/package.json"
+    },
+    "reason": "file not provided"
+  },
+  {
+    "change": {
+      "name": "x",
+      "ecosystem": "npm",
+      "to": "1.0.0",
+      "method": "direct",
+      "file": "package.json"
+    },
+    "reason": "not declared in the manifest"
+  },
+  {
+    "change": {
+      "name": "x",
+      "ecosystem": "pypi",
+      "to": "1.0.0",
+      "method": "override",
+      "file": "Pipfile"
+    },
+    "reason": "no writer for this file"
+  }
+]

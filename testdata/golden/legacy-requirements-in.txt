@@ -1,0 +1,7 @@
+requirements.in is handled like requirements.txt.
+-- changes --
+[{"name":"flask","ecosystem":"pypi","to":"2.0.1","method":"direct","file":"deploy/requirements.in"}]
+-- in:deploy/requirements.in --
+flask==1.0
+-- out:deploy/requirements.in --
+flask==2.0.1

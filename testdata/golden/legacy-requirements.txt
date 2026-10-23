@@ -1,0 +1,14 @@
+requirements.txt: bump, pin a bare dependency, and append a transitive pin.
+-- changes --
+[
+ {"name":"flask","ecosystem":"pypi","to":"2.0.1","method":"direct","file":"requirements.txt"},
+ {"name":"requests","ecosystem":"pypi","to":"2.31.0","method":"direct","file":"requirements.txt"},
+ {"name":"urllib3","ecosystem":"pypi","to":"1.26.18","method":"override","file":"requirements.txt"}
+]
+-- in:requirements.txt --
+flask
+requests>=2.0
+-- out:requirements.txt --
+flask==2.0.1
+requests>=2.31.0
+urllib3==1.26.18

@@ -1,0 +1,21 @@
+An overrides value that is not an object is reported, not rewritten.
+-- changes --
+[{"name":"semver","ecosystem":"npm","to":"7.7.2","method":"override","file":"package.json"}]
+-- in:package.json --
+{
+  "name": "app",
+  "overrides": "nope"
+}
+-- skipped --
+[
+  {
+    "change": {
+      "name": "semver",
+      "ecosystem": "npm",
+      "to": "7.7.2",
+      "method": "override",
+      "file": "package.json"
+    },
+    "reason": "the section is not a JSON object"
+  }
+]

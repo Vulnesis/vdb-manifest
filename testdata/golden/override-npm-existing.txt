@@ -1,0 +1,46 @@
+npm overrides: update an existing pin, add a new one, and set "." of a nested override.
+-- changes --
+[
+ {"name":"semver","ecosystem":"npm","to":"7.7.2","method":"override","file":"package.json"},
+ {"name":"minimatch","ecosystem":"npm","to":"3.1.2","method":"override","file":"package.json"},
+ {"name":"glob","ecosystem":"npm","to":"10.4.5","method":"override","file":"package.json"}
+]
+-- in:package.json --
+{
+  "name": "app",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "overrides": {
+    "semver": "7.5.1",
+    "glob": {
+      ".": "9.0.0",
+      "minimatch": "5.0.0"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
+-- in:package-lock.json --
+{}
+-- out:package.json --
+{
+  "name": "app",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "overrides": {
+    "semver": "7.7.2",
+    "glob": {
+      ".": "10.4.5",
+      "minimatch": "5.0.0"
+    },
+    "minimatch": "3.1.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

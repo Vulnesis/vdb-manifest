@@ -1,0 +1,19 @@
+composer.json direct bump, and an override that adds the child to require (re-marshalled, as the CLI always did).
+-- changes --
+[
+ {"name":"monolog/monolog","ecosystem":"composer","to":"1.27.1","method":"direct","file":"composer.json"},
+ {"name":"guzzlehttp/psr7","ecosystem":"composer","to":"2.5.0","method":"override","file":"composer.json"}
+]
+-- in:composer.json --
+{
+  "require": {
+    "monolog/monolog": "^1.0"
+  }
+}
+-- out:composer.json --
+{
+    "require": {
+        "guzzlehttp/psr7": "^2.5.0",
+        "monolog/monolog": "^1.27.1"
+    }
+}

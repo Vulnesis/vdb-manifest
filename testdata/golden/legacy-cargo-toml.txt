@@ -1,0 +1,20 @@
+Cargo.toml direct bump: string form and inline table form.
+-- changes --
+[
+ {"name":"serde","ecosystem":"cargo","to":"1.0.200","method":"direct","file":"Cargo.toml"},
+ {"name":"tokio","ecosystem":"cargo","to":"1.38.0","method":"direct","file":"Cargo.toml"}
+]
+-- in:Cargo.toml --
+[package]
+name = "app"
+
+[dependencies]
+serde = "1.0.100"
+tokio = { version = "~1.30", features = ["full"] }
+-- out:Cargo.toml --
+[package]
+name = "app"
+
+[dependencies]
+serde = "1.0.200"
+tokio = { version = "~1.38.0", features = ["full"] }

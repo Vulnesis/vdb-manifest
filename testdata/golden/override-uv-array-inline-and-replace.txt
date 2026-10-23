@@ -1,0 +1,18 @@
+uv: an inline array gets an item, and an existing item for the same package (any spelling) is rewritten with its marker kept.
+-- changes --
+[
+ {"name":"urllib3","ecosystem":"pypi","to":"2.2.2","method":"override","file":"a/pyproject.toml"},
+ {"name":"Typing_Extensions","ecosystem":"pypi","to":"4.12.2","method":"override","file":"b/pyproject.toml"}
+]
+-- in:a/pyproject.toml --
+[tool.uv]
+override-dependencies = ["idna==3.7"]
+-- in:b/pyproject.toml --
+[tool.uv]
+override-dependencies = ["typing-extensions>=4 ; python_version < '3.11'", "idna==3.7"]
+-- out:a/pyproject.toml --
+[tool.uv]
+override-dependencies = ["idna==3.7", "urllib3==2.2.2"]
+-- out:b/pyproject.toml --
+[tool.uv]
+override-dependencies = ["typing-extensions==4.12.2 ; python_version < '3.11'", "idna==3.7"]

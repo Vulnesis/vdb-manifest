@@ -1,0 +1,22 @@
+go.mod direct bump on a block entry and on a single line require.
+-- changes --
+[
+ {"name":"github.com/acme/lib","ecosystem":"golang","to":"1.4.0","method":"direct","file":"go.mod"},
+ {"name":"github.com/acme/one","ecosystem":"golang","to":"0.2.0","method":"direct","file":"go.mod"}
+]
+-- in:go.mod --
+module example.test
+
+require github.com/acme/one v0.1.0
+
+require (
+	github.com/acme/lib v1.2.0
+)
+-- out:go.mod --
+module example.test
+
+require github.com/acme/one v0.2.0
+
+require (
+	github.com/acme/lib v1.4.0
+)

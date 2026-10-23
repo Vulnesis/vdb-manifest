@@ -1,0 +1,24 @@
+uv: [tool.uv] exists without the key, so the key is added at the end of the table.
+-- changes --
+[{"name":"urllib3","ecosystem":"pypi","to":"2.2.2","method":"override","file":"pyproject.toml"}]
+-- in:pyproject.toml --
+[project]
+name = "app"
+
+[tool.uv]
+dev-dependencies = ["pytest"]
+
+[[tool.uv.index]]
+name = "internal"
+url = "https://example.com/simple"
+-- out:pyproject.toml --
+[project]
+name = "app"
+
+[tool.uv]
+dev-dependencies = ["pytest"]
+override-dependencies = ["urllib3==2.2.2"]
+
+[[tool.uv.index]]
+name = "internal"
+url = "https://example.com/simple"

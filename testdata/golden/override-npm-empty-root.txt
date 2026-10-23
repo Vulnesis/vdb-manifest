@@ -1,0 +1,7 @@
+An empty root object gets the section.
+-- changes --
+[{"name":"semver","ecosystem":"npm","to":"7.7.2","method":"override","file":"package.json"}]
+-- in:package.json --
+{}
+-- out:package.json --
+{"overrides":{"semver":"7.7.2"}}

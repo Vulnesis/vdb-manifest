@@ -1,0 +1,21 @@
+pnpm: an empty pnpm.overrides object is filled in place.
+-- changes --
+[{"name":"semver","ecosystem":"npm","to":"7.7.2","method":"override","file":"package.json"}]
+-- in:package.json --
+{
+  "name": "app",
+  "pnpm": {
+    "overrides": {}
+  }
+}
+-- in:pnpm-lock.yaml --
+lockfileVersion: '9.0'
+-- out:package.json --
+{
+  "name": "app",
+  "pnpm": {
+    "overrides": {
+      "semver": "7.7.2"
+    }
+  }
+}

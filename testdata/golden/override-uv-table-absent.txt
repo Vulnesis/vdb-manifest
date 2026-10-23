@@ -1,0 +1,16 @@
+uv: a uv.lock beside the file marks a uv project, so the [tool.uv] table is appended.
+-- changes --
+[{"name":"urllib3","ecosystem":"pypi","to":"2.2.2","method":"override","file":"pyproject.toml"}]
+-- in:pyproject.toml --
+[project]
+name = "app"
+dependencies = ["requests>=2.31"]
+-- in:uv.lock --
+version = 1
+-- out:pyproject.toml --
+[project]
+name = "app"
+dependencies = ["requests>=2.31"]
+
+[tool.uv]
+override-dependencies = ["urllib3==2.2.2"]

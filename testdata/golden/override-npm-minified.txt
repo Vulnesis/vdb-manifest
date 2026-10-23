@@ -1,0 +1,7 @@
+A minified package.json stays on one line.
+-- changes --
+[{"name":"semver","ecosystem":"npm","to":"7.7.2","method":"override","file":"package.json"}]
+-- in:package.json nonl --
+{"name":"app","dependencies":{"express":"^4.18.0"}}
+-- out:package.json nonl --
+{"name":"app","dependencies":{"express":"^4.18.0"},"overrides":{"semver":"7.7.2"}}

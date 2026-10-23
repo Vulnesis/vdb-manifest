@@ -1,0 +1,18 @@
+A key with a quote and a value with angle brackets are written without HTML escaping.
+-- changes --
+[{"name":"a\"b","ecosystem":"npm","to":">=1.0.0 <2.0.0","method":"override","file":"package.json"}]
+-- in:package.json --
+{
+  "name": "app",
+  "overrides": {
+    "x": "1.0.0"
+  }
+}
+-- out:package.json --
+{
+  "name": "app",
+  "overrides": {
+    "x": "1.0.0",
+    "a\"b": ">=1.0.0 <2.0.0"
+  }
+}

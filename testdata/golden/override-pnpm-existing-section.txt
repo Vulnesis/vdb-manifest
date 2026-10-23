@@ -1,0 +1,32 @@
+pnpm: overrides go inside the existing pnpm object, after its other keys.
+-- changes --
+[{"name":"semver","ecosystem":"npm","to":"7.7.2","method":"override","file":"package.json"}]
+-- in:package.json --
+{
+  "name": "app",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  },
+  "dependencies": {
+    "vue": "^3.5.0"
+  }
+}
+-- in:pnpm-lock.yaml --
+lockfileVersion: '9.0'
+-- out:package.json --
+{
+  "name": "app",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ],
+    "overrides": {
+      "semver": "7.7.2"
+    }
+  },
+  "dependencies": {
+    "vue": "^3.5.0"
+  }
+}

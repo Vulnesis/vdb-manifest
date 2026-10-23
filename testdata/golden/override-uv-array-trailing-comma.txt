@@ -1,0 +1,32 @@
+uv: an existing multi line array with a trailing comma gets a new item on its own line.
+-- changes --
+[{"name":"urllib3","ecosystem":"pypi","to":"2.2.2","method":"override","file":"pyproject.toml"}]
+-- in:pyproject.toml --
+[project]
+name = "app"
+dependencies = ["requests>=2.31"]
+
+[tool.uv]
+dev-dependencies = ["pytest"]
+override-dependencies = [
+    "idna==3.7",
+    "certifi==2024.2.2",
+]
+
+[tool.ruff]
+line-length = 100
+-- out:pyproject.toml --
+[project]
+name = "app"
+dependencies = ["requests>=2.31"]
+
+[tool.uv]
+dev-dependencies = ["pytest"]
+override-dependencies = [
+    "idna==3.7",
+    "certifi==2024.2.2",
+    "urllib3==2.2.2",
+]
+
+[tool.ruff]
+line-length = 100

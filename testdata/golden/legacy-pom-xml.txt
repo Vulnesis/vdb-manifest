@@ -1,0 +1,59 @@
+pom.xml direct bump (property versions are left alone) and a dependencyManagement pin.
+-- changes --
+[
+ {"name":"org.yaml:snakeyaml","ecosystem":"maven","to":"2.2","method":"direct","file":"pom.xml"},
+ {"name":"org.slf4j:slf4j-api","ecosystem":"maven","to":"2.0.13","method":"direct","file":"pom.xml"},
+ {"name":"com.fasterxml.jackson.core:jackson-databind","ecosystem":"maven","to":"2.15.0","method":"override","file":"pom.xml"}
+]
+-- in:pom.xml --
+<project>
+  <dependencies>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.30</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+  </dependencies>
+</project>
+-- out:pom.xml --
+<project>
+  <dependencies>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.15.0</version>
+    </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
+-- skipped --
+[
+  {
+    "change": {
+      "name": "org.slf4j:slf4j-api",
+      "ecosystem": "maven",
+      "to": "2.0.13",
+      "method": "direct",
+      "file": "pom.xml"
+    },
+    "reason": "not declared in the manifest"
+  }
+]
