@@ -206,3 +206,16 @@ func TestParseTreeCargoLockEmpty(t *testing.T) {
 		t.Fatalf("got %v", err)
 	}
 }
+
+func TestHasWriter(t *testing.T) {
+	for _, f := range []string{"package.json", "web/Package.json", "go.mod", "Cargo.toml", "requirements.txt", "dev.in", "pyproject.toml", "pom.xml", "Gemfile", "composer.json", `a\go.mod`} {
+		if !HasWriter(f) {
+			t.Errorf("%s should have a writer", f)
+		}
+	}
+	for _, f := range []string{"Pipfile", "setup.py", "build.gradle", "build.sbt", "Directory.Packages.props", "pubspec.yaml", "requirements-dev.txt", "package-lock.json"} {
+		if HasWriter(f) {
+			t.Errorf("%s should not have a writer", f)
+		}
+	}
+}

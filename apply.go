@@ -175,6 +175,12 @@ func applyOverride(files map[string]string, c Change, content string) (string, *
 	return skip(ReasonNotDeclared)
 }
 
+// HasWriter reports whether Apply can write to the manifest at file (chosen by
+// its base name, either path separator). A false answer means a Change for the
+// file comes back Skipped with ReasonNoWriter, so callers list the manifest as
+// read only.
+func HasWriter(file string) bool { return hasWriter(baseName(file)) }
+
 // hasWriter reports whether a manifest base name has any writer.
 func hasWriter(base string) bool {
 	switch {

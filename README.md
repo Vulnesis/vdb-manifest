@@ -39,6 +39,7 @@ argv, lockFile, ok := manifest.LockCommand("package.json", "npm", "npm")
 | `DetectPackageManager(siblings, packageManagerField)` | `npm`, `yarn`, `pnpm`, `bun` or `""`. |
 | `OverrideSection(file, packageManager)` | Display label such as `package.json > pnpm.overrides`. |
 | `Satisfies`, `BestInRange` | Range checks for choosing a fix version. Not for affected status. |
+| `HasWriter(file)` | Whether `Apply` can write the manifest. False means read only. |
 | `ParseTree(file, content)` | The resolved dependency edges of `package-lock.json` (lockfile 2 and 3) or `Cargo.lock`. Any other lockfile returns `ErrNoTree`. |
 | `Tree` | `Parents(name, version)`, `PathTo`, `DirectAncestors`, `RootRequires`, `Versions`. Read only, built once. |
 
