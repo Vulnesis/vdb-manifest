@@ -39,6 +39,12 @@ argv, lockFile, ok := manifest.LockCommand("package.json", "npm", "npm")
 | `DetectPackageManager(siblings, packageManagerField)` | `npm`, `yarn`, `pnpm`, `bun` or `""`. |
 | `OverrideSection(file, packageManager)` | Display label such as `package.json > pnpm.overrides`. |
 | `Satisfies`, `BestInRange` | Range checks for choosing a fix version. Not for affected status. |
+| `ParseTree(file, content)` | The resolved dependency edges of `package-lock.json` (lockfile 2 and 3) or `Cargo.lock`. Any other lockfile returns `ErrNoTree`. |
+| `Tree` | `Parents(name, version)`, `PathTo`, `DirectAncestors`, `RootRequires`, `Versions`. Read only, built once. |
+
+A `Tree` is how vdb-site finds the packages a manifest does not declare. npm edges carry the
+range the parent wrote; Cargo.lock does not record ranges, so its edges have an empty `Range`.
+A workspace member (npm) or a path crate (Cargo) stands in for the project.
 
 Methods: `direct` bumps a declared dependency. `parent` bumps the direct parent
 that brings a vulnerable child (`Name` and `To` are the parent's) and is written
