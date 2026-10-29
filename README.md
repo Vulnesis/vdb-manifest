@@ -55,7 +55,7 @@ like `direct`. `override` pins a transitive package in the ecosystem's section.
 
 | File | direct, parent | override |
 | --- | --- | --- |
-| `package.json` | dependency blocks | text edit of `overrides` (npm, bun), `pnpm.overrides`, `resolutions` (yarn) |
+| `package.json` | dependency blocks; a git dependency (`github:o/r#v1.3.0`, `git+https://...#semver:^1.3.0`, `o/r#tag`) keeps its repository and moves only its ref | text edit of `overrides` (npm, bun), `pnpm.overrides`, `resolutions` (yarn) |
 | `composer.json` | require blocks | adds to `require` (re-marshals, sorted keys, four spaces) |
 | `go.mod` | require lines | bumps or adds an `// indirect` require |
 | `requirements.txt`, `*.in` | pin or bump | appends a pin |

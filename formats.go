@@ -349,10 +349,41 @@ func replaceFirstFunc(content string, re *regexp.Regexp, fn func(parts []string)
 // when it is bumped: "^1.0.0" with target 1.3.0 gives "^1.3.0".
 func preserveRangeOperator(oldSpec, target string) string {
 	spec := strings.TrimSpace(oldSpec)
+	if next, ok := replaceGitRef(spec, target); ok {
+		return next
+	}
 	for _, op := range []string{"^", "~>", "~", ">=", "<=", ">", "<"} {
 		if strings.HasPrefix(spec, op) {
 			return op + target
 		}
 	}
 	return target
+}
+
+// replaceGitRef moves an npm git dependency to another tag without turning it
+// into a registry dependency: "github:o/r#v1.3.0" becomes "github:o/r#v1.3.1",
+// and "git+https://github.com/o/r.git#semver:^1.3.0" keeps its semver: range.
+// It reports false for a spec that is not a git reference with a #ref.
+func replaceGitRef(spec, target string) (string, bool) {
+	i := strings.LastIndexByte(spec, '#')
+	if i <= 0 || !isGitSpec(spec[:i]) {
+		return "", false
+	}
+	ref := spec[i+1:]
+	if rest, ok := strings.CutPrefix(ref, "semver:"); ok {
+		return spec[:i+1] + "semver:" + preserveRangeOperator(rest, strings.TrimPrefix(target, "v")), true
+	}
+	return spec[:i+1] + target, true
+}
+
+// isGitSpec reports whether an npm dependency spec, before its #ref, names a
+// git repository: github:, gitlab:, bitbucket:, gist:, a git URL, or owner/name.
+func isGitSpec(s string) bool {
+	for _, p := range []string{"github:", "gitlab:", "bitbucket:", "gist:", "git+", "git://", "git@", "https://", "http://"} {
+		if strings.HasPrefix(s, p) {
+			return true
+		}
+	}
+	parts := strings.Split(s, "/")
+	return len(parts) == 2 && parts[0] != "" && parts[1] != "" && !strings.ContainsAny(s, " :@")
 }

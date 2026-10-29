@@ -334,3 +334,35 @@ func TestPreserveRangeOperator(t *testing.T) {
 		}
 	}
 }
+
+func TestApplyKeepsAnNpmGitDependencyAGitDependency(t *testing.T) {
+	pkg := `{
+  "dependencies": {
+    "left-pad": "github:acme/left-pad#v1.3.0",
+    "mirror": "git+https://github.com/acme/mirror.git#semver:^2.0.0",
+    "short": "acme/short#v0.1.0",
+    "react": "^18.2.0"
+  }
+}`
+	changes := []Change{
+		{Name: "left-pad", Ecosystem: "npm", To: "v1.3.1", Method: MethodDirect, File: "package.json"},
+		{Name: "mirror", Ecosystem: "npm", To: "v2.1.0", Method: MethodDirect, File: "package.json"},
+		{Name: "short", Ecosystem: "npm", To: "v0.2.0", Method: MethodDirect, File: "package.json"},
+		{Name: "react", Ecosystem: "npm", To: "18.3.1", Method: MethodDirect, File: "package.json"},
+	}
+	out, skipped, err := Apply(map[string]string{"package.json": pkg}, changes)
+	if err != nil || len(skipped) != 0 {
+		t.Fatalf("err %v skipped %v", err, skipped)
+	}
+	got := out["package.json"]
+	for _, want := range []string{
+		`"left-pad": "github:acme/left-pad#v1.3.1"`,
+		`"mirror": "git+https://github.com/acme/mirror.git#semver:^2.1.0"`,
+		`"short": "acme/short#v0.2.0"`,
+		`"react": "^18.3.1"`,
+	} {
+		if !strings.Contains(got, want) {
+			t.Errorf("missing %s in\n%s", want, got)
+		}
+	}
+}
