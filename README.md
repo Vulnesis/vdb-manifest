@@ -3,7 +3,7 @@
 Last Updated: 2026-10-23
 
 Text level edits to package manifests, and the commands that regenerate their
-lockfiles. One module so the CLI (`vulnesis fix`), the language server, vdb-site
+lockfiles. One module so the CLI (`vulnetix fix`), the language server, vdb-site
 and vdb-api produce the same bytes for the same fix.
 
 It is standard library only, plus `Masterminds/semver` for range checks. It reads

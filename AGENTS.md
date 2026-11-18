@@ -13,7 +13,7 @@ vdb-site and vdb-api. See README.md for the API.
   format truly needs a parser, say so in the writer's doc comment.
 - The eight legacy writers in `formats.go` are byte-identical with what the CLI
   produced before extraction. Do not "tidy" their regular expressions or output;
-  a change there changes `vulnesis fix` and the golden `legacy-*` cases. Improve a
+  a change there changes `vulnetix fix` and the golden `legacy-*` cases. Improve a
   legacy writer only with a golden case that shows the new output and a note in the
   commit.
 - Lock commands are argv slices for exec, never `sh -c` strings, with install
