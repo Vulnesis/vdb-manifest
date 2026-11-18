@@ -1,4 +1,4 @@
-module github.com/Vulnetix/vdb-manifest
+module github.com/Vulnesis/vdb-manifest
 
 go 1.25.0
 

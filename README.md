@@ -3,14 +3,14 @@
 Last Updated: 2026-10-23
 
 Text level edits to package manifests, and the commands that regenerate their
-lockfiles. One module so the CLI (`vulnetix fix`), the language server, vdb-site
+lockfiles. One module so the CLI (`vulnesis fix`), the language server, vdb-site
 and vdb-api produce the same bytes for the same fix.
 
 It is standard library only, plus `Masterminds/semver` for range checks. It reads
 and writes strings. It never touches the file system, the network or a shell.
 
 ```go
-import manifest "github.com/Vulnetix/vdb-manifest"
+import manifest "github.com/Vulnesis/vdb-manifest"
 
 files := map[string]string{
     "package.json":      packageJSONText,
@@ -87,5 +87,5 @@ existed; their output is byte-identical to the CLI's old output.
 ## Consumers
 
 The CLI imports it through `cli/internal/fix`. vdb-site and vdb-api consume it as a
-sibling module (`replace github.com/Vulnetix/vdb-manifest => ../vdb-manifest`),
+sibling module (`replace github.com/Vulnesis/vdb-manifest => ../vdb-manifest`),
 cloned at container build time like `vdb-sca-match`.

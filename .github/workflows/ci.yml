@@ -17,7 +17,7 @@ permissions:
 jobs:
   test:
     name: Build, Vet & Test
-    runs-on: [self-hosted, Linux, X64, vulnetix-local]
+    runs-on: [self-hosted, Linux, X64, vulnesis-local]
     timeout-minutes: 20
     steps:
       - name: Checkout
@@ -40,7 +40,7 @@ jobs:
       - name: Vet
         run: go vet ./...
 
-      # The Vulnetix CLI and vdb-site edit customer manifests through this module,
+      # The Vulnesis CLI and vdb-site edit customer manifests through this module,
       # so the golden files in testdata/golden are the contract: a changed golden
       # file is a changed edit to someone's file and needs a reason in the commit.
       - name: Test

@@ -1,7 +1,7 @@
 // Package manifest edits package manifests as text and says how to regenerate
 // their lockfiles.
 //
-// It is the one place the CLI (`vulnetix fix`), the language server and the
+// It is the one place the CLI (`vulnesis fix`), the language server and the
 // server side manifest curator get their edits from, so a fix suggested in an
 // editor, written by the CLI or proposed in a pull request is the same bytes.
 //
