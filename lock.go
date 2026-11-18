@@ -14,7 +14,7 @@ import (
 // that only read a setting, [LockEnv] returns the environment to add.
 //
 // ecosystem is npm, pypi, golang, cargo, composer, rubygems or maven (the
-// vulnesis names). packageManager narrows it: npm, yarn, pnpm or bun for npm
+// vulnetix names). packageManager narrows it: npm, yarn, pnpm or bun for npm
 // ("yarn@1" selects yarn classic, anything else yarn berry); poetry or uv for
 // pypi. ok is false when the ecosystem has no lockfile to generate (pip,
 // Maven) or is unknown.
